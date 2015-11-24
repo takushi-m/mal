@@ -11,50 +11,14 @@ services:
 matrix:
   include:
     - env: IMPL=awk
+      services:
+      - docker
     - env: IMPL=bash
-    - env: IMPL=c
-    - env: IMPL=cpp
-    - env: IMPL=coffee
-    - env: IMPL=cs
-    - env: IMPL=clojure
-    - env: IMPL=crystal
-    - env: IMPL=elixir
-    - env: IMPL=erlang NO_PERF=1  # perf runs out of memory
-    - env: IMPL=es6
-    - env: IMPL=factor
-    - env: IMPL=forth
-    - env: IMPL=fsharp
-    - env: IMPL=go
-    - env: IMPL=groovy
-    - env: IMPL=guile
-    - env: IMPL=haskell
-    - env: IMPL=java
-    - env: IMPL=js
-    - env: IMPL=julia
-    - env: IMPL=kotlin
-    - env: IMPL=lua
-    - env: IMPL=make
-    - env: IMPL=mal BUILD_IMPL=js NO_PERF=1
-    #- env: IMPL=matlab  # licensed (until port to Octave)
-    - env: IMPL=miniMAL BUILD_IMPL=js
-    - env: IMPL=nim
-    - env: IMPL=ocaml
-    - env: IMPL=perl
-    - env: IMPL=php
-    - env: IMPL=ps
-    - env: IMPL=python
-    - env: IMPL=r
-    - env: IMPL=racket
-    - env: IMPL=rpython
-    - env: IMPL=ruby
-    - env: IMPL=rust
-    - env: IMPL=scala
+      services:
+      - docker
     - env: IMPL=swift NO_DOCKER=1
       os: osx
       osx_image: xcode7
-    - env: IMPL=tcl
-    - env: IMPL=vimscript NO_PERF=1  # /dev/stdout not writable
-    - env: IMPL=vb
 
 script:
   # Build
