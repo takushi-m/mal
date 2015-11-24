@@ -11,14 +11,9 @@ services:
 matrix:
   include:
     - env: IMPL=awk
-      services:
-      - docker
+      services: [docker]
     - env: IMPL=bash
-      services:
-      - docker
-    - env: IMPL=swift NO_DOCKER=1
-      os: osx
-      osx_image: xcode7
+      services: [docker]
 
 script:
   # Build
