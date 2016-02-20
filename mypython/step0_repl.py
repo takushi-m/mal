@@ -17,10 +17,11 @@ def rep(input):
     return z
 
 
-while True:
-    try:
-        line = input("user> ")
-        output = rep(line)
-        print(output)
-    except Exception as e:
-        break
+if __name__ == '__main__':
+    while True:
+        try:
+            line = input("user> ")
+            output = rep(line)
+            print(output)
+        except Exception as e:
+            break
