@@ -24,17 +24,17 @@ def read_form(reader):
     tk = reader.peek()
     if tk[0]=="(":
         return read_list(reader)
-    elif tk!=")":
+    else:
         return read_atom(reader)
 
 def read_list(reader):
     res = []
-    tk = reader.next()
-    while tk!=")":
+    reader.next()
+    while reader.peek()!=")":
         a = read_form(reader)
         if a!=None:
             res.append(a)
-        tk = reader.next()
+        reader.next()
 
     return res
 
