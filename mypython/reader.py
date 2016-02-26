@@ -42,5 +42,9 @@ def read_atom(reader):
     tk = reader.peek()
     if re.search(r"^[0-9]+$", tk)!=None:
         return int(tk)
+    elif tk=="true":
+        return True
+    elif tk=="false":
+        return False
     else:
         return tk
