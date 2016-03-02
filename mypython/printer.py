@@ -2,7 +2,7 @@ import types
 
 def pr_str(mal_data):
     res = []
-    if isinstance(mal_data, types.LambdaType):
+    if isinstance(mal_data, (types.LambdaType,dict)):
         return "#<function>"
     elif isinstance(mal_data,bool):
         if mal_data:
