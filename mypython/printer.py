@@ -1,6 +1,7 @@
 import types
+from type import Atom
 
-def pr_str(mal_data):
+def pr_str(mal_data, print_readably=True):
     res = []
     if isinstance(mal_data, (types.LambdaType,dict)):
         return "#<function>"
@@ -10,7 +11,11 @@ def pr_str(mal_data):
         else:
             return "false"
     elif isinstance(mal_data,str):
-        return str(mal_data)
+        if print_readably:
+            mal_data = mal_data.replace("\\n","\n").replace("\\\"","\"").replace("\\\\","\\")
+        return mal_data
+    elif isinstance(mal_data,Atom):
+        return "(atom "+str(mal_data.value)+")"
     elif not isinstance(mal_data, list):
         return str(mal_data)
 

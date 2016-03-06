@@ -22,15 +22,18 @@ def tokenizer(string):
 
 def read_form(reader):
     tk = reader.peek()
-    if tk[0]=="(":
+    if tk[0]=="(" or tk[0]=="[":
         return read_list(reader)
+    elif tk=="@":
+        tk = reader.next()
+        return ["deref", read_form(reader)]
     else:
         return read_atom(reader)
 
 def read_list(reader):
     res = []
     reader.next()
-    while reader.peek()!=")":
+    while reader.peek()!=")" and reader.peek()!="]":
         a = read_form(reader)
         if a!=None:
             res.append(a)
