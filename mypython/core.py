@@ -14,6 +14,12 @@ def readfile(name):
         ret = f.read()
     return ret
 
+def concat(*lst):
+    ret = []
+    for l in lst:
+      ret.extend(l)
+    return ret
+
 ns = {
     "+": lambda x,y: x+y
     ,"-": lambda x,y: x-y
@@ -38,4 +44,6 @@ ns = {
     ,"deref": lambda a:a.value
     ,"reset!": lambda a,v:a.reset(v)
     ,"swap!": lambda a,f,*arg:a.reset(f(a.value,*arg) if not isinstance(f,dict) else f["fn"](a.value,*arg))
+    ,"cons": lambda a,lst: [a,*lst]
+    ,"concat": concat
 }

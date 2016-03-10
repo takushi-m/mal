@@ -25,8 +25,20 @@ def read_form(reader):
     if tk[0]=="(" or tk[0]=="[":
         return read_list(reader)
     elif tk=="@":
-        tk = reader.next()
+        reader.next()
         return ["deref", read_form(reader)]
+    elif tk=="'":
+        reader.next()
+        return ["quote", read_form(reader)]
+    elif tk=="`":
+        reader.next()
+        return ["quasiquote", read_form(reader)]
+    elif tk=="~":
+        reader.next()
+        return ["unquote", read_form(reader)]
+    elif tk=="~@":
+        reader.next()
+        return ["splice-unquote", read_form(reader)]
     else:
         return read_atom(reader)
 
