@@ -9,6 +9,8 @@ class Env:
         self.data[key] = val
 
     def find(self,key):
+        if not isinstance(key,str):
+            return None
         if key in self.data:
             return self
         elif key not in self.data and self.outer!=None:
