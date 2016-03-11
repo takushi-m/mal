@@ -58,10 +58,6 @@ def EVAL(ast, env):
         if DEBUG:
             print("EVAL: "+str(ast))
 
-        if not isinstance(ast,list):
-            evaled = eval_ast(ast, env)
-            return evaled
-
         ast = macroexpand(ast,env)
         if not isinstance(ast,list):
             return eval_ast(ast,env)
