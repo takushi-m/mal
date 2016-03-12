@@ -35,7 +35,23 @@ def rest(lst):
         return lst[1:len(lst)]
 
 def throw(s):
-    raise s
+    raise Exception(s)
+
+def prn(*x):
+    print(" ".join([printer.pr_str(v,True) for v in x]))
+    return "nil"
+
+def apply(f,*lst):
+    arg = []
+    for l in lst:
+        if isinstance(l,list):
+            arg.extend(l)
+        else:
+            arg.append(l)
+    if isinstance(f,dict):
+        return f["fn"](*arg)
+    else:
+        return f(*arg)
 
 ns = {
     "+": lambda x,y: x+y
@@ -56,6 +72,7 @@ ns = {
     ,"read-string": lambda s: reader.read_str(malstring2pythonstring(s))
     ,"slurp": lambda fname:"\""+readfile(fname)+"\""
     ,"str": lambda *x: "\""+"".join([malstring2pythonstring(printer.pr_str(v,False)) for v in x])+"\""
+    ,"prn": prn
     ,"atom": lambda v:Atom(v)
     ,"atom?": lambda a:isinstance(a,Atom)
     ,"deref": lambda a:a.value
@@ -67,4 +84,11 @@ ns = {
     ,"first": lambda lst:"nil" if len(lst)==0 or lst=="nil" else nth(lst,0)
     ,"rest": rest
     ,"throw": throw
+    ,"apply": apply
+    ,"map": lambda f,lst: [f(x) for x in lst] if not isinstance(f,dict) else [f["fn"](x) for x in lst]
+    ,"nil?": lambda s:s=="nil"
+    ,"true?": lambda b:isinstance(b,bool) and b
+    ,"false?": lambda b:isinstance(b,bool) and not b
+    ,"symbol?": lambda s:isinstance(s,str) and s!="nil" and re.search("^[^\s\[\]{}('\"`,;)]*$",s)!=None
+    ,"symbol": malstring2pythonstring
 }
