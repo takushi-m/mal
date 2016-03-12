@@ -12,7 +12,7 @@ def readfile(name):
     ret = "";
     with open(name,"r") as f:
         ret = f.read()
-    return ret
+    return ret.replace("\"","\\\"")
 
 def concat(*lst):
     ret = []
@@ -27,7 +27,9 @@ def nth(lst,idx):
         return lst[idx]
 
 def rest(lst):
-    if len(lst)<2:
+    if lst=="nil":
+        return []
+    elif len(lst)<2:
         return []
     else:
         return lst[1:len(lst)]

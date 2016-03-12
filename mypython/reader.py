@@ -22,7 +22,7 @@ def tokenizer(string):
 
 def read_form(reader):
     tk = reader.peek()
-    if tk[0]=="(" or tk[0]=="[":
+    if tk=="(" or tk=="[":
         return read_list(reader)
     elif tk=="@":
         reader.next()
