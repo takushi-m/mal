@@ -20,6 +20,18 @@ def concat(*lst):
       ret.extend(l)
     return ret
 
+def nth(lst,idx):
+    if idx<0 or idx>=len(lst):
+        raise "out of range"
+    else:
+        return lst[idx]
+
+def rest(lst):
+    if len(lst)<2:
+        return []
+    else:
+        return lst[1:len(lst)]
+
 ns = {
     "+": lambda x,y: x+y
     ,"-": lambda x,y: x-y
@@ -46,4 +58,7 @@ ns = {
     ,"swap!": lambda a,f,*arg:a.reset(f(a.value,*arg) if not isinstance(f,dict) else f["fn"](a.value,*arg))
     ,"cons": lambda a,lst: [a,*lst]
     ,"concat": concat
+    ,"nth": nth
+    ,"first": lambda lst:"nil" if len(lst)==0 or lst=="nil" else nth(lst,0)
+    ,"rest": rest
 }
