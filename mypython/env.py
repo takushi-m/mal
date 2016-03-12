@@ -2,8 +2,13 @@ class Env:
     def __init__(self,outer=None,binds=[],exprs=[]):
         self.outer = outer
         self.data = {}
-        for b,e in zip(binds,exprs):
-            self.data[b] = e
+
+        for idx,val in enumerate(binds):
+            if val!="&":
+                self.data[val] = exprs[idx]
+            else:
+                self.data[binds[idx+1]] = exprs[idx:]
+                break
 
     def set(self,key,val):
         self.data[key] = val

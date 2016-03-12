@@ -32,6 +32,9 @@ def rest(lst):
     else:
         return lst[1:len(lst)]
 
+def throw(s):
+    raise s
+
 ns = {
     "+": lambda x,y: x+y
     ,"-": lambda x,y: x-y
@@ -42,7 +45,7 @@ ns = {
     ,"list": lambda *l: [*l]
     ,"list?": lambda lst: isinstance(lst,list)
     ,"empty?": lambda lst: len(lst)==0
-    ,"count": lambda lst: len(lst) if type(lst)==list else 0
+    ,"count": lambda lst: len(lst) if isinstance(lst,(list,tuple)) else 0
     ,"=": lambda x,y: x==y
     ,">": lambda x,y: x>y
     ,"<": lambda x,y: x<y
@@ -61,4 +64,5 @@ ns = {
     ,"nth": nth
     ,"first": lambda lst:"nil" if len(lst)==0 or lst=="nil" else nth(lst,0)
     ,"rest": rest
+    ,"throw": throw
 }
